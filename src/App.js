@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,23 +7,28 @@ import {
 } from "react-router-dom";
 import './App.css';
 
+import Home from "./components/Home/Home/Home";
+export const UserContext = createContext();
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState({});
   return (
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
     <Router>
-      <div>
+      
     <Switch>
-          <Route path="/about">
-            <About />
+    <Route exact path="/">
+          <Home/>
           </Route>
-          <Route path="/users">
+          {/* <Route path="/users">
             <Users />
           </Route>
           <Route path="/">
             <Home />
-          </Route>
+          </Route> */}
         </Switch>
-      </div>
+      
     </Router>
+    </UserContext.Provider>
   );
 }
 

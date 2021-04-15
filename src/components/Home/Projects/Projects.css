@@ -1,0 +1,31 @@
+/* .projects .card{
+    border: 0;
+}
+.projects .card-header{
+    border: 0;
+    background-color: transparent;
+
+
+} */
+
+.projects .card:hover{
+    background-image: linear-gradient(75deg, #19D3AE,#0fcfec);
+    color: #fff !important;
+    transition:  .1s  all ease-in-out !important;
+}
+.projects .card:hover .card-body{
+    /* background-image: url(../../../images/quote.png); */
+    background-color: dimgray;
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: 60%;
+}
+.projects .card:hover h6,
+.projects .card:hover p
+{
+    color: #fff !important;
+
+}
+.projects .card:hover img{
+    display: none;
+}
