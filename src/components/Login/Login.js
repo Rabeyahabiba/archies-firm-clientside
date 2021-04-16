@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from './firebase.config';
 import { UserContext } from '../../App';
+
 const Login = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const history = useHistory();
@@ -36,6 +37,7 @@ const Login = () => {
           // Handle error
         });
     }
+  
     return (
         <div className="login-page container">
         <div className="row align-items-center" style={{ height: "100vh" }}>
@@ -53,6 +55,7 @@ const Login = () => {
             </div>
             <div className="from-group mt-5">
               <button className="btn btn-brand" onClick={handleGoogleSignIn}>Google Sign in</button>
+              
             </div>
           </div>
           <div className="col-md-6 d-none d-md-block align-self-end">
@@ -60,6 +63,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+  
     );
 };
 
