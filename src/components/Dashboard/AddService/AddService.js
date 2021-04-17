@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import Sidebar from '../Sidebar/Sidebar';
 
 
 const AddService = () => {
@@ -12,7 +13,7 @@ const AddService = () => {
       price: data.price,
       imageURL: imageURL
     };
-    const url = `http://localhost:6030/addService`;
+    const url = `https://fathomless-gorge-61136.herokuapp.com/addService`;
     // console.log(eventData)
     fetch(url, {
       method: 'POST',
@@ -42,6 +43,7 @@ const AddService = () => {
   }
   return (
     <div>
+   
       <h1> Add Product </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h4> Service Name</h4>

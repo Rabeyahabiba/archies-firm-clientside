@@ -10,7 +10,7 @@ import Testimonials from '../Testimonials/Testimonials';
 const Home = () => {
     const [services, setServices]= useState([]);
     useEffect(() => {
-          fetch ('http://localhost:6030/services')
+          fetch ('https://fathomless-gorge-61136.herokuapp.com/services')
           .then(res => res.json())
           .then(data => setServices(data))
     },[])

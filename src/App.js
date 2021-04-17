@@ -8,11 +8,8 @@ import {
 import './App.css';
 import AddService from "./components/Dashboard/AddService/AddService";
 import Admin from "./components/Dashboard/Admin/Admin";
-
 import Home from "./components/Home/Home/Home";
-import Orders from "./components/Home/Orders/Orders";
 import PrivateRoute from "./components/Home/PrivateRoute/PrivateRoute";
-
 import Login from "./components/Login/Login";
 import Checkout from "./components/Home/Checkout/Checkout";
 export const UserContext = createContext();
@@ -20,7 +17,7 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
-      <p>Name: {loggedInUser.name}</p>
+      {/* <p>Name: {loggedInUser.name}</p> */}
     <Router>
       
     <Switch>
@@ -37,15 +34,9 @@ function App() {
           <Admin></Admin>
           </Route>
           <Route path="/admin/addService">
-          <AddService></AddService>
-          <PrivateRoute path="/orders/:_id">
-            <Orders />
-          
-          </PrivateRoute>
-          
+          <AddService></AddService>                
           </Route>
-        </Switch>
-      
+        </Switch>     
     </Router>
     </UserContext.Provider>
   );
