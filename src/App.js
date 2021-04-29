@@ -6,12 +6,20 @@ import {
   Link
 } from "react-router-dom";
 import './App.css';
-import AddService from "./components/Dashboard/AddService/AddService";
-import Admin from "./components/Dashboard/Admin/Admin";
+import AddService from "./components/Home/AddService/AddService";
+
 import Home from "./components/Home/Home/Home";
 import PrivateRoute from "./components/Home/PrivateRoute/PrivateRoute";
 import Login from "./components/Login/Login";
 import Checkout from "./components/Home/Checkout/Checkout";
+import Dashboard from "./components/Dashboard/Dashboard/Dashboard";
+import AllOrders from "./components/Home/AllOrders/AllOrders";
+
+import AddReviews from "./components/AddReviews/AddReviews";
+import AllServices from "./components/AllServices/AllServices";
+import AddUser from "./components/User/AddUser/AddUser";
+
+
 export const UserContext = createContext();
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -30,12 +38,24 @@ function App() {
             <PrivateRoute path="/checkout/:_id">
             <Checkout />
             </PrivateRoute>
-            <Route path="/admin">
-          <Admin></Admin>
-          </Route>
-          <Route path="/admin/addService">
-          <AddService></AddService>                
-          </Route>
+            <Route path="/bookings">
+            <AllOrders />
+            </Route>
+            <PrivateRoute path="/addUser">
+            <AddUser />
+          </PrivateRoute>            
+          <PrivateRoute path="/addService">
+          <AddService/>                
+          </PrivateRoute>
+          <PrivateRoute path="/addReview">
+          <AddReviews/>                
+          </PrivateRoute>
+          <PrivateRoute path="/dashboard">
+            <Dashboard />
+            </PrivateRoute>
+            <PrivateRoute path="/manage">
+            <AllServices />
+          </PrivateRoute>
         </Switch>     
     </Router>
     </UserContext.Provider>

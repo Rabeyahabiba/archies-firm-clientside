@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { UserContext } from '../../../App';
-import { Table } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import ProcessPayment from '../ProcessPayment/ProcessPayment';
+import Sidebar from '../../Dashboard/Sidebar/Sidebar';
 const Checkout = () => {
   const { register, handleSubmit, watch, errors } = useForm();
   const history = useHistory()
@@ -24,14 +23,17 @@ const Checkout = () => {
   // const handleCheckout = (_id) => {
   //     history.push(`/orders/${_id}`);
   //   }
-  const onSubmit = data => {
-    setShippingData(data);
-  };
+  // const onSubmit = data => {
+  //   setShippingData(data);
+  // };
   const handlePaymentSuccess = paymentId => {
     const orderDetails = {
       ...loggedInUser,
-      shipment: shippingData,
+      // shipment: shippingData,
+      name:newOrder?.name,
+      price:newOrder?.price,
       paymentId,
+      status: 'pending',
       orderTime: new Date()
     };
     fetch('https://fathomless-gorge-61136.herokuapp.com/addOrder', {
@@ -50,55 +52,79 @@ const Checkout = () => {
       })
   };
   return (
-    <div className="row" style={{ textAlign: 'center' }}>
-      <div className="col-md-4 mt-10">
-        <h1> CheckOut</h1>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Description </th>
-              <th>Quantity</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{newOrder?.name}</td>
-              <td>1</td>
-              <td>{newOrder?.price}</td>
-            </tr>
-            <tr>
-              <td colSpan="2">Total</td>
-              <td>{newOrder?.price}</td>
-            </tr>
-          </tbody>
-          {/* <Button onClick={() => handleCheckout(_id)}>Checkout </Button> */}
-        </Table>
-      </div>
-      <div className="col-md-4 shadow p-5">
-        <h1> Shipping Details </h1>
-        <form className="ship-form" onSubmit={handleSubmit(onSubmit)}>
-          <br />
-          <input name="name" defaultValue={loggedInUser.name} ref={register({ required: true })} placeholder="Your Name" />
-          {errors.name && <span className="error">Name is required</span>}
-          <br />
-          <input name="email" defaultValue={loggedInUser.email} ref={register({ required: true })} placeholder="Your Email" />
-          {errors.email && <span className="error">Email is required</span>}
-          <br />
-          <input name="address" ref={register({ required: true })} placeholder="Your Address" />
-          {errors.address && <span className="error">address is required</span>}
-          <br />
-          <input name="phone" ref={register({ required: true })} placeholder="Your Phone Number" />
-          {errors.address && <span className="error">phone number is required</span>}
-          <br />
-          <input type="submit" />
-        </form>
-      </div>
-      <div className="col-md-4 ml-10">
-        <h2>Pay for me</h2>
-        <ProcessPayment handlePayment={handlePaymentSuccess}></ProcessPayment>
-      </div>
+    // <div className="row" style={{ textAlign: 'center' }}>
+    //    <Sidebar />
+    //   <div className="col-md-4 mt-10">
+    //     <h1> CheckOut</h1>
+    //     <Table striped bordered hover>
+    //       <thead>
+    //         <tr>
+    //           <th>Description </th>
+    //           <th>Quantity</th>
+    //           <th>Price</th>
+    //         </tr>
+    //       </thead>
+    //       <tbody>
+    //         <tr>
+    //           <td>{newOrder?.name}</td>
+    //           <td>1</td>
+    //           <td>{newOrder?.price}</td>
+    //         </tr>
+    //         <tr>
+    //           <td colSpan="2">Total</td>
+    //           <td>{newOrder?.price}</td>
+    //         </tr>
+    //       </tbody>
+    //       {/* <Button onClick={() => handleCheckout(_id)}>Checkout </Button> */}
+    //     </Table>
+    //   </div>
+    //   <div className="col-md-4 shadow p-5">
+    //     <h1> Shipping Details </h1>
+    //     <form className="ship-form" onSubmit={handleSubmit(onSubmit)}>
+    //       <br />
+    //       <input name="name" defaultValue={loggedInUser.name} ref={register({ required: true })} placeholder="Your Name" />
+    //       {errors.name && <span className="error">Name is required</span>}
+    //       <br />
+    //       <input name="email" defaultValue={loggedInUser.email} ref={register({ required: true })} placeholder="Your Email" />
+    //       {errors.email && <span className="error">Email is required</span>}
+    //       <br />
+    //       <input name="address" ref={register({ required: true })} placeholder="Your Address" />
+    //       {errors.address && <span className="error">address is required</span>}
+    //       <br />
+    //       <input name="phone" ref={register({ required: true })} placeholder="Your Phone Number" />
+    //       {errors.address && <span className="error">phone number is required</span>}
+    //       <br />
+    //       <input type="submit" />
+    //     </form>
+    //   </div>
+    //   <div className="col-md-4 ml-10">
+    //     <h2>Pay for me</h2>
+    //     <ProcessPayment handlePayment={handlePaymentSuccess}></ProcessPayment>
+    //   </div>
+    // </div>
+
+    <div className="container-fluid">
+    <div className="row">
+        <Sidebar />
+        <div className="col-md-5 p-4">
+            <h3 className="py-2">Check Out</h3>
+            <div className="mb-3">
+                <label className="form-label">Service Name</label>
+                <input type="text" className="form-control" Value={newOrder?.name} placeholder="New user name" rows="3" readOnly />
+            </div>
+            <div className="mb-3">
+                <label className="form-label">Price: </label>
+                <input className="form-control" value={newOrder?.price} rows="3" readOnly />
+
+            </div>
+
+            <div className="mb-3">
+                <label className="form-label"><h5 className="py-2">Payment card information:</h5></label>
+                <ProcessPayment handlePayment={handlePaymentSuccess}></ProcessPayment>
+            </div>
+        </div>
     </div>
+</div>
   );
 };
 
