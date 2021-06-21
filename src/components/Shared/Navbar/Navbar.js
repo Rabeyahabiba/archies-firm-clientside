@@ -12,9 +12,6 @@ const Navbar = () => {
                     <li class="nav-item">
                         <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
                     </li>
-                    {/* <li class="nav-item">
-                        <a class="nav-link ms-5" href="#">Home</a>
-                    </li> */}
                     <li class="nav-item">
                         <a class="nav-link ms-5 text-white" href="#">About</a>
                     </li>
