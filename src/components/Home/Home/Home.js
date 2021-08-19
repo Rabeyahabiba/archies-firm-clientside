@@ -20,7 +20,7 @@ const Home = () => {
             <div className="services-container mt-5">
             <div className="text-center">
             <h5 className="text-secondary">OUR SERVICES</h5>
-                <h2>Services We Provided</h2>
+                <h2>Services We Provide</h2>
             </div>
             <div className="d-flex justify-content-center">
             <div className="w-100 row mt-2 pt-2">
